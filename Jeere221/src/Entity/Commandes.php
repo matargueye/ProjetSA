@@ -27,6 +27,30 @@ class Commandes
      */
     private $etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Livreurs::class, inversedBy="commande")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $livreurs;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Paniers::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $panier;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Factures::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $facture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="commandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +76,54 @@ class Commandes
     public function setEtat(bool $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getLivreurs(): ?Livreurs
+    {
+        return $this->livreurs;
+    }
+
+    public function setLivreurs(?Livreurs $livreurs): self
+    {
+        $this->livreurs = $livreurs;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Paniers
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(Paniers $panier): self
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    public function getFacture(): ?Factures
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?Factures $facture): self
+    {
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    public function getClient(): ?Clients
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Clients $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

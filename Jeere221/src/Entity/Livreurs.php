@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\LivreursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=LivreursRepository::class)
  */
 class Livreurs
@@ -31,6 +35,28 @@ class Livreurs
      * @ORM\Column(type="string", length=255)
      */
     private $Tel_Livreur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Villes::class, inversedBy="livreurs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $ville;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="livreurs")
+     */
+    private $commande;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="livreur")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->commande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +95,60 @@ class Livreurs
     public function setTelLivreur(string $Tel_Livreur): self
     {
         $this->Tel_Livreur = $Tel_Livreur;
+
+        return $this;
+    }
+
+    public function getVille(): ?Villes
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Villes $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commandes[]
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addCommande(Commandes $commande): self
+    {
+        if (!$this->commande->contains($commande)) {
+            $this->commande[] = $commande;
+            $commande->setLivreurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commandes $commande): self
+    {
+        if ($this->commande->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getLivreurs() === $this) {
+                $commande->setLivreurs(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }

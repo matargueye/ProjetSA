@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ProduitsRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
  */
 class Produits
@@ -51,6 +55,29 @@ class Produits
      * @ORM\Column(type="date")
      */
     private $date_ajout;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Vendeurs::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $vendeur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CategorieProdui::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Paniers::class, mappedBy="produit")
+     * 
+     */
+    private $paniers;
+
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +164,57 @@ class Produits
     public function setDateAjout(\DateTimeInterface $date_ajout): self
     {
         $this->date_ajout = $date_ajout;
+
+        return $this;
+    }
+
+    public function getVendeur(): ?Vendeurs
+    {
+        return $this->vendeur;
+    }
+
+    public function setVendeur(?Vendeurs $vendeur): self
+    {
+        $this->vendeur = $vendeur;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?CategorieProdui
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategorieProdui $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Paniers[]
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Paniers $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Paniers $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            $panier->removeProduit($this);
+        }
 
         return $this;
     }
