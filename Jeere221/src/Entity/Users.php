@@ -7,12 +7,17 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
+
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=UsersRepository::class)
  */
-class Users
+class Users  implements UserInterface
 {
     /**
      * @ORM\Id
@@ -37,6 +42,7 @@ class Users
     private $email;
 
     /**
+     * @var string The hashed password
      * @ORM\Column(type="string", length=255)
      */
     private $pasword;
@@ -69,6 +75,9 @@ class Users
 
     public function __construct()
     {
+        
+      
+        $this->isActive = true;
         $this->vendeur = new ArrayCollection();
         $this->livreur = new ArrayCollection();
         $this->client = new ArrayCollection();
@@ -151,6 +160,58 @@ class Users
         return $this;
     }
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    
+    public function getRoles(): array
+    {
+        
+        return [strtoupper($this->role->getLibelle())];
+    }
+
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
     /**
      * @return Collection|Vendeurs[]
      */
