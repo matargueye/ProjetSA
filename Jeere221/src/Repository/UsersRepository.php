@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Users;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Users|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,19 @@ class UsersRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Users::class);
+    }
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    {
+        if (!$user instanceof Users) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setPasword($newEncodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
     }
 
     // /**
