@@ -39,13 +39,13 @@ class Users  implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $username;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", length=255)
      */
-    private $pasword;
+    private $password;
 
     /**
      * @ORM\Column(type="boolean")
@@ -112,29 +112,15 @@ class Users  implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
+    
+    public function setUsername(string $username): self
     {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+        $this->username= $username;
 
         return $this;
     }
 
-    public function getPasword(): ?string
-    {
-        return $this->pasword;
-    }
-
-    public function setPasword(string $pasword): self
-    {
-        $this->pasword = $pasword;
-
-        return $this;
-    }
+   
 
     public function getIsActive(): ?bool
     {
@@ -167,7 +153,7 @@ class Users  implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210311233108 extends AbstractMigration
+final class Version20210316132834 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -29,7 +29,7 @@ final class Version20210311233108 extends AbstractMigration
         $this->addSql('CREATE TABLE paniers_produits (paniers_id INT NOT NULL, produits_id INT NOT NULL, INDEX IDX_7B1D2CABBE35FDA0 (paniers_id), INDEX IDX_7B1D2CABCD11A2CF (produits_id), PRIMARY KEY(paniers_id, produits_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE produits (id INT AUTO_INCREMENT NOT NULL, vendeur_id INT NOT NULL, categorie_id INT NOT NULL, nom_produit VARCHAR(255) NOT NULL, prix_unitaire VARCHAR(255) NOT NULL, quantite_stock VARCHAR(255) NOT NULL, caracteristique VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, image_produit LONGBLOB NOT NULL, date_ajout DATE NOT NULL, INDEX IDX_BE2DDF8C858C065E (vendeur_id), INDEX IDX_BE2DDF8CBCF5E72D (categorie_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, prenom VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, pasword VARCHAR(255) NOT NULL, is_active TINYINT(1) NOT NULL, INDEX IDX_1483A5E9D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, prenom VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, is_active TINYINT(1) NOT NULL, INDEX IDX_1483A5E9D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE vendeurs (id INT AUTO_INCREMENT NOT NULL, users_id INT NOT NULL, photo_cni_v LONGBLOB NOT NULL, logo_vendeur LONGBLOB NOT NULL, adresse_vendeur VARCHAR(255) NOT NULL, tel_vendeur VARCHAR(255) NOT NULL, INDEX IDX_2180DE367B3B43D (users_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE villes (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE clients ADD CONSTRAINT FK_C82E7467B3B43D FOREIGN KEY (users_id) REFERENCES users (id)');
