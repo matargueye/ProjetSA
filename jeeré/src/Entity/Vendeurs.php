@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\VendeursRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VendeursRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ApiResource()
+ * @ApiResource(iri="http://schema.org/Livreurs")
  * @ORM\Entity(repositoryClass=VendeursRepository::class)
  */
 class Vendeurs
@@ -21,13 +22,20 @@ class Vendeurs
      */
     private $id;
 
-    /**
+   /**
+     * @var MediaObject|null
      * @ORM\Column(type="blob")
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ApiProperty(iri="http://schema.org/Photo_CNI_V")
      */
     private $Photo_CNI_V;
 
-    /**
+     /**
+     * @var MediaObject|null
      * @ORM\Column(type="blob")
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ApiProperty(iri="http://schema.org/Logo_Vendeur")
      */
     private $Logo_Vendeur;
 
