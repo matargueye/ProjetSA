@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -25,21 +26,15 @@ class VendeursController extends AbstractController
     /**
      * @Route("api/new/vendeurs", name="vendeurs", methods={"POST"})
      */
-    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,VendeursRepository $ClientsRepository)
+    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,VendeursRepository $VendeursRepository)
     {
      
         $values = json_decode($request->getContent());
         $dateJours = new \DateTime();
         $user = new Users();
         $Vendeurs= new Vendeurs();
-        $users = json_decode($request->getUser("id"));
-     
-        $role = $roleRepository->findOneBy(array('Libelle' => 'client'));
+        $role = $roleRepository->findOneBy(array('Libelle' => 'vendeur'));
       
-     
-       
-    
-
         
         $user = new Users();
         $user->setUsername($values->username);
@@ -49,9 +44,16 @@ class VendeursController extends AbstractController
         $user->setNom($values->nom);
         $user->getRoles();
       
+        $Vendeurs->setAdresseVendeur($values->adresse_vendeur)
+        ->setTelVendeur($values->tel_vendeur)
+        ->setPhotoCNIV($values->photo_cni_v)
+        ->setLogoVendeur($values->logo_vendeur)
+        ->SetUsers($user)
+        ->getUsers();
        
-    
+
                  $manager->persist($user);
+                 $manager->persist($Vendeurs);
                  $manager->flush();
 
                $data = [

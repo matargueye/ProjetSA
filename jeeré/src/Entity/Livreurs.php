@@ -41,12 +41,6 @@ class Livreurs
     private $Tel_Livreur;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Villes::class, inversedBy="livreurs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $ville;
-
-    /**
      * @ORM\OneToMany(targetEntity=Commandes::class, mappedBy="livreurs")
      */
     private $commande;
@@ -56,6 +50,11 @@ class Livreurs
      * @ORM\JoinColumn(nullable=false)
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
 
     public function __construct()
     {
@@ -103,18 +102,6 @@ class Livreurs
         return $this;
     }
 
-    public function getVille(): ?Villes
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?Villes $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Commandes[]
      */
@@ -153,6 +140,18 @@ class Livreurs
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

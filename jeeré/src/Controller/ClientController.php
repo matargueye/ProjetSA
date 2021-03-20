@@ -32,17 +32,10 @@ class ClientController extends AbstractController
     {
      
         $values = json_decode($request->getContent());
-        $dateJours = new \DateTime();
         $user = new Users();
         $client = new Clients();
-        $users = json_decode($request->getUser("id"));
      
         $role = $roleRepository->findOneBy(array('Libelle' => 'client'));
-      
-     
-       
-    
-
         
         $user = new Users();
         $user->setUsername($values->username);

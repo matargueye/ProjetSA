@@ -190,7 +190,8 @@ class Produits
         return $this->categorie;
     }
 
-    public function setCategorie(?CategorieProdui $categorie): self
+    public function setCategorie(?CategorieProdui $categorie): self	
+    
     {
         $this->categorie = $categorie;
 
