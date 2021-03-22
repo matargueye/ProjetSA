@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * @ApiResource(iri="http://schema.org/Livreurs")
@@ -21,23 +24,6 @@ class Vendeurs
      * @ORM\Column(type="integer")
      */
     private $id;
-
-   /**
-     * @var MediaObject|null
-     * @ORM\Column(type="blob")
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/Photo_CNI_V")
-     */
-    private $Photo_CNI_V;
-
-     /**
-     * @var MediaObject|null
-     * @ORM\Column(type="blob")
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ApiProperty(iri="http://schema.org/Logo_Vendeur")
-     */
-    private $Logo_Vendeur;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,6 +46,17 @@ class Vendeurs
      */
     private $users;
 
+    /**
+     *
+     * @var MediaObject|null
+     * 
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="integer")
+     * @ApiProperty(iri="http://schema.org/image")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -68,30 +65,6 @@ class Vendeurs
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPhotoCNIV()
-    {
-        return $this->Photo_CNI_V;
-    }
-
-    public function setPhotoCNIV($Photo_CNI_V): self
-    {
-        $this->Photo_CNI_V = $Photo_CNI_V;
-
-        return $this;
-    }
-
-    public function getLogoVendeur()
-    {
-        return $this->Logo_Vendeur;
-    }
-
-    public function setLogoVendeur($Logo_Vendeur): self
-    {
-        $this->Logo_Vendeur = $Logo_Vendeur;
-
-        return $this;
     }
 
     public function getAdresseVendeur(): ?string
@@ -156,6 +129,18 @@ class Vendeurs
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getImage(): ?int
+    {
+        return $this->image;
+    }
+
+    public function setImage(?int $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

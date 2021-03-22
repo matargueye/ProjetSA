@@ -46,8 +46,7 @@ class VendeursController extends AbstractController
       
         $Vendeurs->setAdresseVendeur($values->adresse_vendeur)
         ->setTelVendeur($values->tel_vendeur)
-        ->setPhotoCNIV($values->photo_cni_v)
-        ->setLogoVendeur($values->logo_vendeur)
+        ->setImage($values->image_id)
         ->SetUsers($user)
         ->getUsers();
        

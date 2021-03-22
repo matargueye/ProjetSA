@@ -57,10 +57,12 @@ class Livreurs
     private $users;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Villes::class, inversedBy="livreurs")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
 
+   
     public function __construct()
     {
         $this->commande = new ArrayCollection();
@@ -149,15 +151,17 @@ class Livreurs
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getVille(): ?Villes
     {
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille(?Villes $ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
+
+   
 }

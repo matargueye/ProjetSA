@@ -8,6 +8,7 @@ use App\Entity\Livreurs;
 use App\Entity\MediaObject;
 use App\Repository\RoleRepository;
 use App\Repository\UsersRepository;
+use App\Repository\VillesRepository;
 use App\Repository\LivreursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class LivreursController extends AbstractController
     /**
      * @Route("api/new/livreurs", name="livreurs")
      */
-    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,LivreursRepository $LivreursRepository)
+    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,LivreursRepository $LivreursRepository,VillesRepository $VillesRepository)
     {
      
         $values = json_decode($request->getContent());
@@ -36,6 +37,7 @@ class LivreursController extends AbstractController
         $user = new Users();
         $Livreurs= new Livreurs;
         $role = $roleRepository->findOneBy(array('Libelle' => 'livreur'));
+        $ville=$VillesRepository->findOneBy(array('id' =>$values->ville_id));
         
         $user = new Users();
         $user->setUsername($values->username);
@@ -47,9 +49,10 @@ class LivreursController extends AbstractController
         $manager->persist($user);
         $Livreurs->setAdresseLivreur($values->adresse_livreur);
         $Livreurs ->setTelLivreur($values->tel_livreur);
-        $Livreurs->setVille($values->ville);
         $Livreurs->SetUsers($user);
-        $Livreurs->setImage($value->image_id);
+        $Livreurs->setVille($ville);
+        $Livreurs->setImage($values->image_id);
+       
         
      
         $manager->persist($Livreurs);
