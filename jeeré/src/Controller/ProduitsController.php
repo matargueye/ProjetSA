@@ -13,6 +13,7 @@ use App\Repository\CategorieProduiRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +39,7 @@ class ProduitsController extends AbstractController
         $user = $this->tokenStorage->getToken()->getUser();
         $values = json_decode($request->getContent());
         $vendeur=$VendeurRepository->findOneBy(array('users' => $user));
-        $categories =$CategorieRepository->findOneBy(array('Libelle'=>$values));
+        $categories =$CategorieRepository->findOneBy(array('id'=>$values->categorie_id));
       
         $dateJours = new \DateTime();
         $Produits= new Produits;
@@ -46,14 +47,13 @@ class ProduitsController extends AbstractController
         $Produits->setPrixUnitaire($values->prix_unitaire);
         $Produits->setQuantiteStock($values->quantite_stock);
         $Produits->setCaracteristique($values->caracteristique);
-        $Produits->setImageProduit($values->image_produit );
         $Produits->setDescription($values->description);
-        $Produits->setCategorie( $categories);
+        $Produits->setCategorie($categories);
         $Produits->setDateAjout( $dateJours);
+        $Produits->setImage($values->image_id);
+       
+        
     
-
-      
-
         $Produits->setVendeur( $vendeur);
         $Produits->setDateAjout($dateJours);
        
@@ -67,13 +67,12 @@ class ProduitsController extends AbstractController
     
                 return new JsonResponse($data, 201);
                 
-
-
+     
 
         }
 
      /**
-     * @Route("api/ajout/add_produits/{id}", name="produits",methods={"POST"})
+     * @Route("api/ajout/add_produits/{id}", name="produits_panier",methods={"POST"})
      */
     public function add($id,SessionInterface $session){
 

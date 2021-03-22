@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Entity\Villes;
 use App\Entity\Livreurs;
+use App\Entity\MediaObject;
 use App\Repository\RoleRepository;
 use App\Repository\UsersRepository;
 use App\Repository\LivreursRepository;
@@ -34,13 +35,7 @@ class LivreursController extends AbstractController
         $dateJours = new \DateTime();
         $user = new Users();
         $Livreurs= new Livreurs;
-        $ville= new Villes;
         $role = $roleRepository->findOneBy(array('Libelle' => 'livreur'));
-      
-     
-       
-    
-
         
         $user = new Users();
         $user->setUsername($values->username);
@@ -49,27 +44,29 @@ class LivreursController extends AbstractController
         $user->setPrenom($values->prenom);
         $user->setNom($values->nom);
         $user->getRoles();
-      
-        $Livreurs->setAdresseLivreur($values->adresse_livreur)
-        ->setTelLivreur($values->tel_livreur)
-        ->setPhotoCNIL($values->photo_cni_l)
-        ->setVille($values->ville)
-        ->SetUsers($user)
-        ->getUsers();
+        $manager->persist($user);
+        $Livreurs->setAdresseLivreur($values->adresse_livreur);
+        $Livreurs ->setTelLivreur($values->tel_livreur);
+        $Livreurs->setVille($values->ville);
+        $Livreurs->SetUsers($user);
+        $Livreurs->setImage($value->image_id);
+        
+     
+        $manager->persist($Livreurs);
+        $manager->flush();
+
+        $data = [
+       'status' => 201,
+       'message' => 'création compte réussi'];
+
+       return new JsonResponse($data, 201);
+       
       
       
        
 
-                 $manager->persist($user);
-                 $manager->persist($Livreurs);
-                 $manager->flush();
-
-               $data = [
-                'status' => 201,
-                'message' => 'création compte réussi'];
-    
-                return new JsonResponse($data, 201);
-                
+             
+               
 
 
 

@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(iri="http://schema.org/Produits")
@@ -48,15 +50,6 @@ class Produits
     private $description;
 
     /**
-     * @var MediaObject|null
-     * @ORM\Column(type="blob")
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/image_produit")
-     */
-    private $image_produit;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $date_ajout;
@@ -78,6 +71,18 @@ class Produits
      * 
      */
     private $paniers;
+
+      /**
+     *
+     * @var MediaObject|null
+     * 
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="integer")
+     * @ApiProperty(iri="http://schema.org/image")
+     */
+    private $image;
+
 
     public function __construct()
     {
@@ -149,18 +154,7 @@ class Produits
         return $this;
     }
 
-    public function getImageProduit()
-    {
-        return $this->image_produit;
-    }
-
-    public function setImageProduit($image_produit): self
-    {
-        $this->image_produit = $image_produit;
-
-        return $this;
-    }
-
+    
     public function getDateAjout(): ?\DateTimeInterface
     {
         return $this->date_ajout;
@@ -224,4 +218,18 @@ class Produits
 
         return $this;
     }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+   
 }

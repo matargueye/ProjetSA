@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * @ApiResource(iri="http://schema.org/Produits")
@@ -21,14 +24,16 @@ class Livreurs
      * @ORM\Column(type="integer")
      */
     private $id;
- /**
+    /**
+     *
      * @var MediaObject|null
-     * @ORM\Column(type="blob")
+     * 
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/$Photo_CNI_L")
+     * @ORM\Column(type="integer")
+     * @ApiProperty(iri="http://schema.org/image")
      */
-    private $Photo_CNI_L;
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -66,14 +71,14 @@ class Livreurs
         return $this->id;
     }
 
-    public function getPhotoCNIL()
+    public function getImage()
     {
-        return $this->Photo_CNI_L;
+        return $this->image;
     }
 
-    public function setPhotoCNIL($Photo_CNI_L): self
+    public function setImage($image): self
     {
-        $this->Photo_CNI_L = $Photo_CNI_L;
+        $this->image = $image;
 
         return $this;
     }
