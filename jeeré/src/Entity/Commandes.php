@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandesRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ *  @ApiResource()
  * @ORM\Entity(repositoryClass=CommandesRepository::class)
  */
 class Commandes
