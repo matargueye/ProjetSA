@@ -30,7 +30,6 @@ class Livreurs
      * 
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @ORM\Column(type="integer")
      * @ApiProperty(iri="http://schema.org/image")
      */
     private $image;

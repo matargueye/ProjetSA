@@ -66,11 +66,7 @@ class Produits
      */
     private $categorie;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Paniers::class, mappedBy="produit")
-     * 
-     */
-    private $paniers;
+
 
       /**
      *
@@ -78,7 +74,6 @@ class Produits
      * 
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
-     * @ORM\Column(type="integer")
      * @ApiProperty(iri="http://schema.org/image")
      */
     private $image;
@@ -192,33 +187,7 @@ class Produits
         return $this;
     }
 
-    /**
-     * @return Collection|Paniers[]
-     */
-    public function getPaniers(): Collection
-    {
-        return $this->paniers;
-    }
-
-    public function addPanier(Paniers $panier): self
-    {
-        if (!$this->paniers->contains($panier)) {
-            $this->paniers[] = $panier;
-            $panier->addProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removePanier(Paniers $panier): self
-    {
-        if ($this->paniers->removeElement($panier)) {
-            $panier->removeProduit($this);
-        }
-
-        return $this;
-    }
-
+   
     public function getImage()
     {
         return $this->image;

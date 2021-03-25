@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Factures;
 use App\Entity\Commandes;
+use App\Repository\ClientsRepository;
 use App\Repository\PaniersRepository;
 use App\Repository\FacturesRepository;
 use App\Repository\LivreursRepository;
@@ -28,7 +29,7 @@ class CommandesController extends AbstractController
     /**
      * @Route("/api/commandes", name="commandes",methods={"POST"})
      */
-    public function newCompte(Request $request,SessionInterface $session,EntityManagerInterface $manager,CommandesRepository $CommandeRepository,FacturesRepository $FacturesRepository,PaniersRepository $PanieRepository,LivreursRepository $livreursRepository)
+    public function newCompte(Request $request,SessionInterface $session,EntityManagerInterface $manager,CommandesRepository $CommandeRepository,FacturesRepository $FacturesRepository,livreursRepository $livreursRepository,ClientsRepository $ClientRepository)
     {
      
         $values = json_decode($request->getContent());
@@ -36,6 +37,8 @@ class CommandesController extends AbstractController
         $facture = new Factures();
         $dateJours = new \DateTime();
         $user = $this->tokenStorage->getToken()->getUser();
+        $client =$ClientRepository->findOneBy(array('users'=>$user));
+      
         $livreur =$livreursRepository->findOneBy(array('id'=>$values->livreurs_id));
         $panier=$session->get('panier',[]);
         $panierData=[];
@@ -58,9 +61,11 @@ class CommandesController extends AbstractController
         $commandes->setDateCommande($dateJours );
         $commandes->setEtat($values->etat);
         $commandes->setLivreurs( $livreur);
-        $commandes->setPanier($panier);
         $commandes->setFacture($facture);
         $commandes->setClient($user);
+        $commandes->setNomClient($user->getNom());
+        $commandes->setTel($client->getTelClient());
+        $commandes->setAdresse($client->getAdresseClient());
        
         $factures->setDateFacture($dateJours);
                 

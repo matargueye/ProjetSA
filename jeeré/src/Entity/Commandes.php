@@ -35,11 +35,7 @@ class Commandes
      */
     private $livreurs;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Paniers::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $panier;
+    
 
     /**
      * @ORM\OneToOne(targetEntity=Factures::class, cascade={"persist", "remove"})
@@ -52,6 +48,21 @@ class Commandes
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $NomClient;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Adresse;
 
     public function getId(): ?int
     {
@@ -94,17 +105,7 @@ class Commandes
         return $this;
     }
 
-    public function getPanier(): ?Paniers
-    {
-        return $this->panier;
-    }
-
-    public function setPanier(Paniers $panier): self
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
+  
 
     public function getFacture(): ?Factures
     {
@@ -126,6 +127,42 @@ class Commandes
     public function setClient(?Clients $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getNomClient(): ?string
+    {
+        return $this->NomClient;
+    }
+
+    public function setNomClient(string $NomClient): self
+    {
+        $this->NomClient = $NomClient;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->Adresse;
+    }
+
+    public function setAdresse(string $Adresse): self
+    {
+        $this->Adresse = $Adresse;
 
         return $this;
     }
