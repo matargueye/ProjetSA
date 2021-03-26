@@ -34,7 +34,7 @@ class VendeursController extends AbstractController
         $dateJours = new \DateTime();
         $user = new Users();
         $Vendeurs= new Vendeurs();
-        $mediaobjet =$MediaObjectRepository>findOneBy(array('id'=>$values->image_id));
+        $mediaobjet =$MediaObjectRepository->findOneBy(array('id'=>$values->image));
         $role = $roleRepository->findOneBy(array('Libelle' => 'vendeur'));
       
         

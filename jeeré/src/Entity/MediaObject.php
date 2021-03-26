@@ -5,8 +5,6 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\CreateMediaObjectAction;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -85,48 +83,8 @@ class MediaObject
      */
     public $filePath;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Produits::class, mappedBy="image")
-     */
-    private $produits;
-
-    public function __construct()
-    {
-        $this->produits = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Produits[]
-     */
-    public function getProduits(): Collection
-    {
-        return $this->produits;
-    }
-
-    public function addProduit(Produits $produit): self
-    {
-        if (!$this->produits->contains($produit)) {
-            $this->produits[] = $produit;
-            $produit->setImage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduit(Produits $produit): self
-    {
-        if ($this->produits->removeElement($produit)) {
-            // set the owning side to null (unless already changed)
-            if ($produit->getImage() === $this) {
-                $produit->setImage(null);
-            }
-        }
-
-        return $this;
     }
 }

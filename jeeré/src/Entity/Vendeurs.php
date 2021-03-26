@@ -53,6 +53,7 @@ class Vendeurs
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
+     * 
      */
     private $image;
 
@@ -137,7 +138,7 @@ class Vendeurs
         return $this->image;
     }
 
-    public function setImage(?int $image): self
+    public function setImage( $image): self
     {
         $this->image = $image;
 
