@@ -25,7 +25,7 @@ class ClientController extends AbstractController
     $this->encoder = $encoder;
     }
     /**
-    * @Route("api/new/clients", name="clients", methods={"POST"}))
+    * @Route("/new/clients", name="clients", methods={"POST"}))
     * 
      */
     public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,ClientsRepository $ClientsRepository)
@@ -48,10 +48,10 @@ class ClientController extends AbstractController
        
         $client->setAdresseClient($values->adresse_client)
                ->setTelClient($values->tel_client)
-                ->SetUsers($user)
-                ->getUsers();
-                 $manager->persist($user);
-                $manager->persist($client);
+               ->SetUsers($user)
+               ->getUsers();
+               $manager->persist($user);
+               $manager->persist($client);
                $manager->flush();
 
                $data = [

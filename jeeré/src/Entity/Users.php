@@ -7,6 +7,8 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Unique;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -14,10 +16,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 
+
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=UsersRepository::class)
- * @UniqueEntity("username" , message="cette utilisateur existe déja.")
  */
 class Users  implements UserInterface
 {
@@ -40,6 +42,7 @@ class Users  implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Unique(message="The {{ username }} username is repeated.")
      */
     private $username;
 

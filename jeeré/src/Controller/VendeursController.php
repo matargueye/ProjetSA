@@ -25,7 +25,7 @@ class VendeursController extends AbstractController
     $this->encoder = $encoder;
     }
     /**
-     * @Route("api/new/vendeurs", name="vendeurs", methods={"POST"})
+     * @Route("/new/vendeurs", name="vendeurs", methods={"POST"})
      */
     public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,VendeursRepository $VendeursRepository,MediaObjectRepository $MediaObjectRepository)
     {

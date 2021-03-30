@@ -13,6 +13,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ApiResource(iri="http://schema.org/Produits")
+ * 
+ * 
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
  */
 class Produits
@@ -77,6 +79,11 @@ class Produits
      * @ApiProperty(iri="http://schema.org/image")
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
 
     public function __construct()
@@ -196,6 +203,18 @@ class Produits
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }
