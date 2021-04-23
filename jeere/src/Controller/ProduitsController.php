@@ -34,7 +34,7 @@ class ProduitsController extends AbstractController
     }
     /**
      * @Route("api/ajout/produits", name="produits",methods={"POST"})
-     * @IsGranted({"ROLE_VENDEUR"})
+    
      */
     
     public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,ProduitsRepository $ProduitsRepository,CategorieProduiRepository $CategorieRepository,VendeursRepository $VendeurRepository,UsersRepository $UserRepository,MediaObjectRepository $MediaObjectRepository,TypeProduitRepository $typeProduitRepository)
@@ -43,7 +43,7 @@ class ProduitsController extends AbstractController
         $user = $this->tokenStorage->getToken()->getUser();
         $values = json_decode($request->getContent());
         $vendeur=$VendeurRepository->findOneBy(array('users' => $user));
-        $categories =$CategorieRepository->findOneBy(array('id'=>$values->categorie_id));
+        $categories =$CategorieRepository->findOneBy(array('id'=>$values->categorie));
         $mediaobjet =$MediaObjectRepository->findOneBy(array('id'=>$values->image));
         $typeproduits=$typeProduitRepository->findOneBy(array('id'=>$values->type_produit));
 
