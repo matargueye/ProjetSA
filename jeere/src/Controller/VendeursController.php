@@ -10,7 +10,6 @@ use App\Repository\VendeursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\MediaObjectRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,17 +26,16 @@ class VendeursController extends AbstractController
     /**
      * @Route("/new/vendeurs", name="vendeurs", methods={"POST"})
      */
-    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,VendeursRepository $VendeursRepository,MediaObjectRepository $MediaObjectRepository)
+    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,VendeursRepository $VendeursRepository)
     {
      
         $values = json_decode($request->getContent());
         $dateJours = new \DateTime();
         $user = new Users();
         $Vendeurs= new Vendeurs();
-        $mediaobjet =$MediaObjectRepository->findOneBy(array('id'=>$values->image));
         $role = $roleRepository->findOneBy(array('Libelle' => 'vendeur'));
       
-        
+      
         $user = new Users();
         $user->setUsername($values->username);
         $user->setRole($role);
@@ -48,7 +46,6 @@ class VendeursController extends AbstractController
       
         $Vendeurs->setAdresseVendeur($values->adresse_vendeur)
         ->setTelVendeur($values->tel_vendeur)
-        ->setImage($mediaobjet)
         ->SetUsers($user)
         ->getUsers();
        

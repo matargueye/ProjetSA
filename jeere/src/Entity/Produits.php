@@ -70,17 +70,6 @@ class Produits
     private $categorie;
 
 
-
-      /**
-     *
-     * @var MediaObject|null
-     * 
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/image")
-     */
-    private $image;
-
     /**
      * @ORM\Column(type="boolean")
      */
@@ -91,6 +80,11 @@ class Produits
      * @ORM\JoinColumn(nullable=false)
      */
     private $type_produit;
+
+    /**
+     * @ORM\Column(type="blob")
+     */
+    private $image;
 
 
     public function __construct()
@@ -202,17 +196,7 @@ class Produits
     }
 
    
-    public function getImage()
-    {
-        return $this->image;
-    }
 
-    public function setImage($image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getIsActive(): ?bool
     {
@@ -234,6 +218,18 @@ class Produits
     public function setTypeProduit(?TypeProduit $type_produit): self
     {
         $this->type_produit = $type_produit;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -26,15 +26,6 @@ class Livreurs
      * @ORM\Column(type="integer")
      */
     private $id;
-    /**
-     *
-     * @var MediaObject|null
-     * 
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/image")
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -74,17 +65,6 @@ class Livreurs
         return $this->id;
     }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getAdresseLivreur(): ?string
     {

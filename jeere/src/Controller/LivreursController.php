@@ -3,16 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Users;
-use App\Entity\Villes;
 use App\Entity\Livreurs;
 use App\Repository\RoleRepository;
 use App\Repository\UsersRepository;
 use App\Repository\VillesRepository;
 use App\Repository\LivreursRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\MediaObjectRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +26,7 @@ class LivreursController extends AbstractController
     /**
      * @Route("/new/livreurs", name="livreurs")
      */
-    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,LivreursRepository $LivreursRepository,VillesRepository $VillesRepository,MediaObjectRepository $MediaObjectRepository)
+    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,RoleRepository $roleRepository,UsersRepository $userRepository,LivreursRepository $LivreursRepository,VillesRepository $VillesRepository)
     {
      
         $values = json_decode($request->getContent());
@@ -38,7 +35,6 @@ class LivreursController extends AbstractController
         $Livreurs= new Livreurs;
         $role = $roleRepository->findOneBy(array('Libelle' => 'livreur'));
         $ville=$VillesRepository->findOneBy(array('id' =>$values->ville));
-        $mediaobjet =$MediaObjectRepository->findOneBy(array('id'=>$values->image));
 
         
         $user = new Users();
@@ -53,7 +49,7 @@ class LivreursController extends AbstractController
         $Livreurs ->setTelLivreur($values->tel_livreur);
         $Livreurs->SetUsers($user);
         $Livreurs->setVille($ville);
-        $Livreurs->setImage($mediaobjet);
+      
        
         
      

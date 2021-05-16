@@ -42,6 +42,11 @@ class Clients
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $CNI;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -114,6 +119,18 @@ class Clients
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getCNI(): ?string
+    {
+        return $this->CNI;
+    }
+
+    public function setCNI(string $CNI): self
+    {
+        $this->CNI = $CNI;
 
         return $this;
     }

@@ -49,15 +49,10 @@ class Vendeurs
     private $users;
 
     /**
-     *
-     * @var MediaObject|null
-     * 
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
-     * @ORM\JoinColumn(nullable=true)
-     * @ApiProperty(iri="http://schema.org/image")
-     * 
+     * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $CNI;
+
 
     public function __construct()
     {
@@ -135,15 +130,17 @@ class Vendeurs
         return $this;
     }
 
-    public function getImage(): ?int
+    public function getCNI(): ?string
     {
-        return $this->image;
+        return $this->CNI;
     }
 
-    public function setImage( $image): self
+    public function setCNI(string $CNI): self
     {
-        $this->image = $image;
+        $this->CNI = $CNI;
 
         return $this;
     }
+
+  
 }
