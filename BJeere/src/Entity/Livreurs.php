@@ -54,6 +54,11 @@ class Livreurs
      */
     private $ville;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $CNI;
+
    
     public function __construct()
     {
@@ -144,5 +149,16 @@ class Livreurs
         return $this;
     }
 
+    public function getCNI(): ?string
+    {
+        return $this->CNI;
+    }
+
+    public function setCNI(string $CNI): self
+    {
+        $this->CNI = $CNI;
+
+        return $this;
+    }
    
 }

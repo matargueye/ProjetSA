@@ -46,6 +46,7 @@ class VendeursController extends AbstractController
       
         $Vendeurs->setAdresseVendeur($values->adresse_vendeur)
         ->setTelVendeur($values->tel_vendeur)
+        ->setCNI($values->CNI)
         ->SetUsers($user)
         ->getUsers();
        

@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './components/authentification/authentification.component';
+import { CompteClientComponent } from './components/compte-client/compte-client.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthentificationComponent,
+    CompteClientComponent
+   
     
     
   ],
