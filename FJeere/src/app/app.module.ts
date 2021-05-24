@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './components/authentification/authentification.component';
 import { CompteClientComponent } from './components/compte-client/compte-client.component';
+import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthentificationComponent,
-    CompteClientComponent
+    CompteClientComponent,
+    ListeproduitsComponent,
+  
    
     
     

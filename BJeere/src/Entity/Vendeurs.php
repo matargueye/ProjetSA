@@ -5,18 +5,18 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VendeursRepository;
 use Doctrine\Common\Collections\Collection;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
- * @ApiResource(iri="http://schema.org/Livreurs")
+ * @ApiResource(iri="http://schema.org/Vendeurs",
+ * normalizationContext={"groups"={"produit:read"}})
  * @ORM\Entity(repositoryClass=VendeursRepository::class)
- * @Vich\Uploadable
  */
 class Vendeurs
 {

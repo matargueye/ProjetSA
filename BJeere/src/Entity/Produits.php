@@ -4,18 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProduitsRepository;
-use Doctrine\Common\Collections\Collection;
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(iri="http://schema.org/Produits")
- * @Vich\Uploadable
- * 
- * 
+ * @ApiResource(iri="http://schema.org/Produits",
+ * normalizationContext={"groups"={"produit:read"}})
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
  */
 class Produits
@@ -24,65 +21,82 @@ class Produits
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"produit:read"})
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit:read"})
      */
     private $nom_produit;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit:read"})
      */
     private $prix_unitaire;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit:read"})
      */
+
     private $quantite_stock;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit:read"})
      */
     private $caracteristique;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"produit:read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"produit:read"})
      */
     private $date_ajout;
 
     /**
      * @ORM\ManyToOne(targetEntity=Vendeurs::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"produit:read"})
      */
     private $vendeur;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategorieProdui::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
+     * 
      */
     private $categorie;
 
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"produit:read"})
+     * 
      */
     private $isActive;
 
     /**
      * @ORM\ManyToOne(targetEntity=TypeProduit::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * 
      */
     private $type_produit;
 
     /**
      * @ORM\Column(type="blob")
+     * @Groups({"produit:read"})
+     * 
      */
     private $image;
 

@@ -7,11 +7,13 @@ use App\Repository\UsersRepository;
 use App\Repository\ProduitsRepository;
 use App\Repository\VendeursRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\CategorieProduiRepository;
 use App\Repository\TypeProduitRepository;
+use App\Repository\CategorieProduiRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,30 +40,45 @@ class ProduitsController extends AbstractController
         $user = $this->tokenStorage->getToken()->getUser();
         $values = json_decode($request->getContent());
         $vendeur=$VendeurRepository->findOneBy(array('users' => $user));
-        $categories =$CategorieRepository->findOneBy(array('id'=>$values->categorie));
-        $typeproduits=$typeProduitRepository->findOneBy(array('id'=>$values->type_produit));
+        //$categories =$CategorieRepository->findOneBy(array('id'=>$values->categorie));
+        //$typeproduits=$typeProduitRepository->findOneBy(array('id'=>$values->type_produit));
 
         $dateJours = new \DateTime();
         $Produits= new Produits;
-        $Produits->setNomProduit($values->nom_produit);
-        $Produits->setPrixUnitaire($values->prix_unitaire);
-        $Produits->setQuantiteStock($values->quantite_stock);
-        $Produits->setCaracteristique($values->caracteristique);
-        $Produits->setDescription($values->description);
+        $image = $request->files->get("image");
+
+        $image = fopen($image->getRealPath(),"rb");
+
+        $nom = $request->request->all()["nom_produit"];
+        $prix_unitaire = $request->request->all()["prix_unitaire"];
+        $quantite_stock = $request->request->all()["quantite_stock"];
+        $caracteristique = $request->request->all()["caracteristique"];
+        $description = $request->request->all()["description"];
+        $isActive= $request->request->all()["isActive"];
+        $categorie=$request->request->all()["categorie"];
+        $categories =$CategorieRepository->findOneBy(array('id'=>$categorie));
+        $typeproduit=$request->request->all()["typeProduit"];
+        $typeproduits=$typeProduitRepository->findOneBy(array('id'=>$typeproduit));
+
+        $Produits->setNomProduit($nom);
+        $Produits->setPrixUnitaire($prix_unitaire);
+        $Produits->setQuantiteStock($quantite_stock);
+        $Produits->setCaracteristique($caracteristique);
+        $Produits->setDescription($description);
         $Produits->setCategorie($categories);
         $Produits->setDateAjout( $dateJours);
-        $Produits->setIsActive($values->isActive);
-        $Produits->setTypeProduit( $typeproduits);
-        
-       
-        
-    
+        $Produits->setIsActive($isActive);
+        $Produits->setTypeProduit($typeproduits);
+        $Produits->setImage($image);
+         
         $Produits->setVendeur( $vendeur);
         $Produits->setDateAjout($dateJours);
        
     
                  $manager->persist($Produits);
                  $manager->flush();
+                 fclose($image);
+      
 
                $data = [
                 'status' => 201,
@@ -72,6 +89,25 @@ class ProduitsController extends AbstractController
      
 
         }
+    /**
+     * @Route("/list", name="list")
+     */
+    public function index( SerializerInterface $serializer,EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,ProduitsRepository $ProduitsRepository,CategorieProduiRepository $CategorieRepository,VendeursRepository $VendeurRepository,UsersRepository $UserRepository,TypeProduitRepository $typeProduitRepository): Response
+    {
+        $data = $ProduitsRepository->findAll();
+        $images = [];
+        foreach ($data as $key => $entity) {
+           // $images[$key] = base64_encode(stream_get_contents($entity->getImage()));
+            $entity->setImage((base64_encode(stream_get_contents($entity->getImage()))));
+        }
+        
+        $images= $serializer->serialize($data, 'json');
+
+        return new Response($images, 200, [
+            'Content-Type' => 'application/json'
+        ]);
+
+    }
 
      /**
      * @Route("api/ajout/add_produits/{id}", name="produits_panier",methods={"POST"})
@@ -118,8 +154,6 @@ class ProduitsController extends AbstractController
 
      /**
      * @Route("api/remove/panier/{id}", name="remove_panier",methods={""})
-     * 
-     * 
      */
      public function RemovePanier(SessionInterface $session, $id){
 
@@ -130,6 +164,5 @@ class ProduitsController extends AbstractController
      }
 
      }
-
 
 }
