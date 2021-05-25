@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Produit } from '../models/produit';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -10,10 +10,9 @@ import { Produit } from '../models/produit';
 export class ProduitsService {
 
   constructor(private http:HttpClient) {}
-  ListeProduits(data:any){
-    return this.http.get<any[]>(`${environment.apiUrl}/api/produits`,data);
+  getAllProduits(): Observable<any[]>  {
+  return this.http.get<any[]>(`${environment.apiUrl}/list` );
    
   }
-  
 
 }

@@ -7,6 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './components/authentification/authentification.component';
 import { CompteClientComponent } from './components/compte-client/compte-client.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
+import { HeaderComponent } from './components/header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import { SideBareComponent } from './components/side-bare/side-bare.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -15,7 +22,10 @@ import { ListeproduitsComponent } from './components/listeproduits/listeproduits
     AuthentificationComponent,
     CompteClientComponent,
     ListeproduitsComponent,
-  
+    HeaderComponent,
+    SideBareComponent,
+    FooterComponent,
+ 
    
     
     
@@ -24,7 +34,11 @@ import { ListeproduitsComponent } from './components/listeproduits/listeproduits
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

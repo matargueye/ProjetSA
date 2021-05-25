@@ -2,6 +2,8 @@ import { AuthentificationComponent } from './components/authentification/authent
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CompteClientComponent } from './components/compte-client/compte-client.component';
+import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
+import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
     path:'compte_client',
     component: CompteClientComponent
   },
+  {
+    path:'liste_produits',
+    component:ListeproduitsComponent
+  },
+  {
+    path:'header',
+    component: HeaderComponent
+  }
 ];
 
 @NgModule({
