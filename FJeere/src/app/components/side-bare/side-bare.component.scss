@@ -1,13 +1,31 @@
-.example-container {
-    width: 400px;
-    height: 200px;
-    margin: 12px;
-    border: 1px solid #555;
-}
-
-mat-drawer-content {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+                .row {
+                    width: 1000px;
+                    margin-left: 150px;
+                    margin-top: 60px;
+                    margin-right: 20px;
+                    height: 1000px;
+                    box-shadow: 1px 1px 12px #555;
+                }
+                
+                .col-4 {
+                    float: left;
+                    width: 200px;
+                }
+                
+                .categories {
+                    font-size: 18px;
+                    color: white;
+                    background-color: rgb(57, 163, 233);
+                    text-align: center;
+                    border: 1px solid;
+                }
+                
+                .itemp {
+                    text-align: center;
+                    color: rgb(57, 163, 233);
+                }
+                
+                #partenaire {
+                    width: 100px;
+                    height: 100px;
+                }

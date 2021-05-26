@@ -1,23 +1,20 @@
-                body {
-                    background-color: rgba(92, 176, 221, 0.466);
-                }
-                
-                .row {
-                    width: 1000px;
-                    margin-left: 150px;
-                    margin-top: 40px;
-                    margin-right: 20px;
-                    height: 500px;
-                }
-                
-                .col-4 {
-                    border: 1px solid rgb(111, 238, 238);
-                    float: left;
-                    width: 200px;
-                }
-                
-                .col-8 {
-                    border: 1px solid;
-                    float: right;
-                    margin-left: 90px;
-                }
+               .row {
+                   width: 1000px;
+                   margin-left: 150px;
+                   margin-top: 60px;
+                   margin-right: 20px;
+                   height: auto;
+                   box-shadow: 1px 1px 12px rgba(185, 181, 181, 0.514);
+                   background-color: rgba(147, 178, 196, 0.411);
+               }
+               
+               .col-4 {
+                   float: left;
+                   width: 200px;
+                   background-color: rgba(255, 255, 255, 0.993);
+               }
+               
+               .col-8 {
+                   float: right;
+                   margin-left: 90px;
+               }
