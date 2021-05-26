@@ -1,3 +1,23 @@
-body {
-    background-color: rgba(166, 197, 214, 0.466);
-}
+                body {
+                    background-color: rgba(92, 176, 221, 0.466);
+                }
+                
+                .row {
+                    width: 1000px;
+                    margin-left: 150px;
+                    margin-top: 40px;
+                    margin-right: 20px;
+                    height: 500px;
+                }
+                
+                .col-4 {
+                    border: 1px solid rgb(111, 238, 238);
+                    float: left;
+                    width: 200px;
+                }
+                
+                .col-8 {
+                    border: 1px solid;
+                    float: right;
+                    margin-left: 90px;
+                }

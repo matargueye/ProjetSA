@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompteClientComponent } from './components/compte-client/compte-client.component';
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SideBareComponent } from './components/side-bare/side-bare.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'header',
     component: HeaderComponent
+  },
+  {
+    path:'sidBire',
+    component:SideBareComponent
   }
 ];
 

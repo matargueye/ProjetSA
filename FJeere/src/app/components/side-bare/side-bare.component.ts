@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-bare.component.scss']
 })
 export class SideBareComponent implements OnInit {
+  showFiller = false;
 
   constructor() { }
 
