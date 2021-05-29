@@ -5,11 +5,14 @@ import { CompteClientComponent } from './components/compte-client/compte-client.
 import { ListeproduitsComponent } from './components/listeproduits/listeproduits.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SideBareComponent } from './components/side-bare/side-bare.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AcceuilleComponent } from './pages/acceuille/acceuille.component';
+
 
 const routes: Routes = [
   {
-    path:'login',
-    component: AuthentificationComponent
+    path:'acceuille',
+    component: AcceuilleComponent
   },
   {
     path:'compte_client',
@@ -26,7 +29,13 @@ const routes: Routes = [
   {
     path:'sidBire',
     component:SideBareComponent
-  }
+  },
+  {
+    path:'footer',
+    component:FooterComponent
+  },
+  
+  
 ];
 
 @NgModule({

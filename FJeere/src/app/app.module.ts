@@ -15,6 +15,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { SideBareComponent } from './components/side-bare/side-bare.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { AcceuilleComponent } from './pages/acceuille/acceuille.component';
+import { ConnexionclientComponent } from './pages/connexionclient/connexionclient.component';
+import { EspaceclientComponent } from './pages/espaceclient/espaceclient.component';
+import {MatCardModule} from '@angular/material/card'; 
 
 
 @NgModule({
@@ -26,6 +30,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     HeaderComponent,
     SideBareComponent,
     FooterComponent,
+    AcceuilleComponent,
+    ConnexionclientComponent,
+    EspaceclientComponent,
  
    
     
@@ -40,7 +47,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatSliderModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { ProduitsService } from 'src/app/services/produits.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listeproduits',
@@ -7,25 +9,21 @@ import { ProduitsService } from 'src/app/services/produits.service';
   styleUrls: ['./listeproduits.component.scss']
 })
 export class ListeproduitsComponent implements OnInit {
-  Produits = [];
+  produits = [];
+ 
   urlimg = 'data:image/png;base64,';
-  dataMenus: any;
   constructor(private listeproduit:ProduitsService) { }
 
+
   ngOnInit(): void {
-
-  this.listeproduit.getAllProduits()
-  .subscribe( data => {
-  this.Produits = data;
-  console.log(data);
-    
-
-  });
-}
- applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataMenus.filter = filterValue.trim();
   
+    this.listeproduit.getAllProduits().subscribe( produits => {
+        this. produits =  produits;
+        console.log(this. produits);
+        
+    });
+  }
+    
   }
 
-}
+

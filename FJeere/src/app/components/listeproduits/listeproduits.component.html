@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<div class="col-md-12 mx-auto menu">
+    <div class="row ">
+        <div class="col-sm-6 col-md-4 my-1 " *ngFor="let produit of produits;">
+            <div class="card grid">
+
+                <img [src]="urlimg+produit.image" class="produit" alt=" ... ">
+
+                <p class="nom">{{ produit.designation }}<br>
+                    <span class="prix">{{ produit.prixunitaire}}</span> </p>
+                <a>
+                    <p class=""> Commander</p>
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>

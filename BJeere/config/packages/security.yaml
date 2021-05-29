@@ -31,7 +31,7 @@ security:
         api:
             pattern:  ^/api
             stateless: true
-            anonymous: false
+            anonymous: true
             provider: entity_provider
             guard:
                 authenticators:

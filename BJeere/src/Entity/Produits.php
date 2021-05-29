@@ -29,21 +29,22 @@ class Produits
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"produit:read"})
+     * 
      */
-    private $nom_produit;
+    private $designation;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"produit:read"})
      */
-    private $prix_unitaire;
+    private $prixunitaire;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"produit:read"})
      */
 
-    private $quantite_stock;
+    private $quantitestock;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -111,39 +112,38 @@ class Produits
         return $this->id;
     }
 
-    public function getNomProduit(): ?string
+    public function getDesignation(): ?string
     {
-        return $this->nom_produit;
+        return $this->designation;
     }
 
-    public function setNomProduit(string $nom_produit): self
+    public function setDesignation(string $designation): self
     {
-        $this->nom_produit = $nom_produit;
+        $this->designation = $designation;
 
         return $this;
     }
 
-    public function getPrixUnitaire(): ?string
+    public function getPrixunitaire(): ?string
     {
-        return $this->prix_unitaire;
+        return $this->prixunitaire;
     }
 
-    public function setPrixUnitaire(string $prix_unitaire): self
+    public function setPrixunitaire(string $prixunitaire): self
     {
-        $this->prix_unitaire = $prix_unitaire;
+        $this->prixunitaire = $prixunitaire;
 
         return $this;
     }
 
-    public function getQuantiteStock(): ?string
+    public function getQuantitestock(): ?string
     {
-        return $this->quantite_stock;
+        return $this->quantitestock;
     }
 
-    public function setQuantiteStock(string $quantite_stock): self
+    public function setQuantitestock(string $quantitestock): self
     {
-        $this->quantite_stock = $quantite_stock;
-
+        $this->quantitestock = $quantitestock;
         return $this;
     }
 

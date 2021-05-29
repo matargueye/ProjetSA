@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 export class ProduitsService {
 
   constructor(private http:HttpClient) {}
-  getAllProduits(): Observable<any[]>  {
-  return this.http.get<any[]>(`${environment.apiUrl}/list` );
+  getAllProduits() {
+  return this.http.get<any[]>(`${environment.apiUrl}/liste/produits` );
    
   }
 

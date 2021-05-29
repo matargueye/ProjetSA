@@ -34,7 +34,7 @@ class ProduitsController extends AbstractController
     
      */
     
-    public function newCompte(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,ProduitsRepository $ProduitsRepository,CategorieProduiRepository $CategorieRepository,VendeursRepository $VendeurRepository,UsersRepository $UserRepository,TypeProduitRepository $typeProduitRepository)
+    public function AjoutProduit(Request $request, EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,ProduitsRepository $ProduitsRepository,CategorieProduiRepository $CategorieRepository,VendeursRepository $VendeurRepository,UsersRepository $UserRepository,TypeProduitRepository $typeProduitRepository)
     {
      
         $user = $this->tokenStorage->getToken()->getUser();
@@ -48,10 +48,9 @@ class ProduitsController extends AbstractController
         $image = $request->files->get("image");
 
         $image = fopen($image->getRealPath(),"rb");
-
-        $nom = $request->request->all()["nom_produit"];
-        $prix_unitaire = $request->request->all()["prix_unitaire"];
-        $quantite_stock = $request->request->all()["quantite_stock"];
+        $nom = $request->request->all()["designation"];
+        $prix_unitaire = $request->request->all()["prixunitaire"];
+        $quantite_stock = $request->request->all()["quantitestock"];
         $caracteristique = $request->request->all()["caracteristique"];
         $description = $request->request->all()["description"];
         $isActive= $request->request->all()["isActive"];
@@ -60,9 +59,9 @@ class ProduitsController extends AbstractController
         $typeproduit=$request->request->all()["typeProduit"];
         $typeproduits=$typeProduitRepository->findOneBy(array('id'=>$typeproduit));
 
-        $Produits->setNomProduit($nom);
-        $Produits->setPrixUnitaire($prix_unitaire);
-        $Produits->setQuantiteStock($quantite_stock);
+        $Produits->setDesignation($nom);
+        $Produits->setPrixunitaire($prix_unitaire);
+        $Produits->setQuantitestock($quantite_stock);
         $Produits->setCaracteristique($caracteristique);
         $Produits->setDescription($description);
         $Produits->setCategorie($categories);
@@ -90,11 +89,12 @@ class ProduitsController extends AbstractController
 
         }
     /**
-     * @Route("/list", name="list")
+     * @Route("/liste/produits", name="list" ,methods={"GET"})
      */
     public function index( SerializerInterface $serializer,EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncode,ProduitsRepository $ProduitsRepository,CategorieProduiRepository $CategorieRepository,VendeursRepository $VendeurRepository,UsersRepository $UserRepository,TypeProduitRepository $typeProduitRepository): Response
     {
         $data = $ProduitsRepository->findAll();
+       
         $images = [];
         foreach ($data as $key => $entity) {
            // $images[$key] = base64_encode(stream_get_contents($entity->getImage()));
