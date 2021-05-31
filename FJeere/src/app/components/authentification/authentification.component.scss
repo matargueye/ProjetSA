@@ -1,0 +1,34 @@
+.row {
+    width: 700px;
+    height: auto;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.col-4 {
+    width: 300px;
+    height: auto;
+}
+
+.login {
+    background-color: rgb(57, 163, 233);
+    align-content: center;
+    color: white;
+    width: 90px;
+}
+
+.connexion {
+    color: rgb(57, 163, 233);
+}
+
+.compte {
+    background-color: rgb(57, 163, 233);
+    color: white;
+    text-align: center;
+    margin-top: 35px;
+    box-shadow: 1px 1px 12px rgba(185, 181, 181, 0.514);
+    font-size: 20px;
+    margin-left: 40px;
+    width: 200px;
+    height: 100px;
+}

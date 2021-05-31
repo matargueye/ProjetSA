@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SideBareComponent } from './components/side-bare/side-bare.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AcceuilleComponent } from './pages/acceuille/acceuille.component';
+import { ConnexionclientComponent } from './pages/connexionclient/connexionclient.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,13 @@ const routes: Routes = [
     path:'acceuille',
     component: AcceuilleComponent
   },
+
+  {
+    path:'login',
+    component: ConnexionclientComponent
+
+  },
+  
   {
     path:'compte_client',
     component: CompteClientComponent

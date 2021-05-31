@@ -1,0 +1,23 @@
+.row {
+    width: 1000px;
+    margin-left: 190px;
+    margin-top: 60px;
+    margin-right: 20px;
+    height: auto;
+    box-shadow: 1px 1px 12px rgba(185, 181, 181, 0.514);
+    background-color: rgba(147, 178, 196, 0.411);
+}
+
+.col-4 {
+    float: left;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.993);
+    height: auto;
+}
+
+.col-8 {
+    float: right;
+    margin-left: 40px;
+    width: 700px;
+    height: auto;
+}
